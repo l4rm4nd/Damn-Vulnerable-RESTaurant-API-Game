@@ -1,6 +1,6 @@
 services:
 
-  dvra:
+  web:
     image: ghcr.io/l4rm4nd/damn-vulnerable-restaurant-api-game:0.1.x
     container_name: dvra
     command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8091 --workers 1 --reload"
@@ -14,7 +14,7 @@ services:
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-admin}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-OnlyChefsCanAccessDatabases}
-      - POSTGRES_SERVER=${POSTGRES_SERVER:-dvra-db}
+      - POSTGRES_SERVER=${POSTGRES_SERVER:-db}
       - POSTGRES_PORT=${POSTGRES_PORT:-5432}
       - POSTGRES_DB=${POSTGRES_DB:-restaurant}
     networks:
@@ -28,7 +28,7 @@ services:
     #  # Part for optional traefik middlewares
     #  - traefik.http.routers.dvra.middlewares=authelia@docker 
 
-  dvra-db:
+  db:
     image: postgres:16-alpine
     container_name: dvra-db
     environment:
