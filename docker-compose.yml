@@ -9,7 +9,7 @@ services:
     expose:
       - 8091
     depends_on:
-      dvra-db:
+      db:
         condition: service_healthy
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-admin}
